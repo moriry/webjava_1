@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+   <title>Shopping</title>
+<!-- Start Content Settings -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- End Content Settings -->
+
+<!-- Start Cascading Style Sheets -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/bootstrap_custom.css}" rel="stylesheet">
+<link th:href="@{/css/fontawesome/css/all.css}" rel="stylesheet">
+<link th:href="@{/css/detail.css}" rel="stylesheet">
+<!-- End Cascading Style Sheets -->
+</head>
+
+<body>
+    <!-- Contents -->
+        <div class="container">
+            <div class="mt-6 p-3">
+            <!-- エラーメッセージ：普段は非表示 -->
+            <div class="col-sm-12">
+                <ul class="caption form-group alert alert-danger mt-3 text-danger" th:if="${errorMessage} != null">
+                    <li style="list-style-position: inside;" th:text="${errorMessage}" />
+                </ul>
+            </div>
+                <div class="table-responsive">
+                    <table class="table text-nowrap mt-2">
+                        <thead>
+                            <tr>
+                                <th>商品名</th>
+                                <th>値段</th>
+                                <th>個数</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <form th:action="@{/shopping}" method="POST" th:object="${order}">
+                                    <td th:text="${item.getItemName1()}"></td>
+                                    <td th:text="'&yen;' + ${item.getItemPrice1()}"></td>
+                                    <td><input type="number" class="form-control form-1line col-sm-3" id="item1Count" th:field="*{item1Count}"></td>
+                                    <td class="d-flex justify-content-end pr-0">
+                                        <button type="submit" class="btn btn-primary btn-primary-cu">カートに追加</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            <tr>
+                                <form th:action="@{/shopping}" method="POST" th:object="${order}">
+                                    <td th:text="${item.getItemName2()}"></td>
+                                    <td th:text="'&yen;' + ${item.getItemPrice2()}"></td>
+                                    <td><input type="number" class="form-control form-1line col-sm-3" th:field="*{item2Count}"></td>
+                                    <td class="d-flex justify-content-end pr-0">
+                                       <button type="submit" class="btn btn-primary btn-primary-cu">カートに追加</button>
+                                    </td>
+                                </form>
+                            </tr>
+                            <tr>
+                                <form th:action="@{/shopping}" method="POST" th:object="${order}">
+                                    <td th:text="${item.getItemName3()}"></td>
+                                    <td th:text="'&yen;' + ${item.getItemPrice3()}"></td>
+                                    <td><input type="number" class="form-control form-1line col-sm-3" th:field="*{item3Count}"></td>
+                                    <td class="d-flex justify-content-end pr-0">
+                                        <button type="submit" class="btn btn-primary btn-primary-cu">カートに追加</button>
+                                    </td>
+                                </form>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-2">
+                    <form th:action="@{/delete-cart}" method="POST">
+                        <button type="submit" class="btn btn-outline-secondary btn-outline-secondary-cu">カート情報削除</button>
+                    </form>
+                </div>
+                <div class="col-12 col-md-2">
+                    <form th:action="@{/show-cart}" method="POST">
+                        <button type="submit" class="btn btn-primary btn-primary-cu">カート情報表示</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>

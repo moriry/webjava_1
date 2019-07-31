@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+   <title>Shopping</title>
+<!-- Start Content Settings -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- End Content Settings -->
+
+<!-- Start Cascading Style Sheets -->
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/css/bootstrap_custom.css}" rel="stylesheet">
+<link th:href="@{/css/fontawesome/css/all.css}" rel="stylesheet">
+<link th:href="@{/css/detail.css}" rel="stylesheet">
+<!-- End Cascading Style Sheets -->
+</head>
+
+<body>
+<!-- Contents -->
+<div class="container">
+    <div class="mt-6 p-3">
+         <div class="font-weight-bold">
+             カート内情報
+         </div>
+        <div class="table-responsive mt-2">
+            <table class="table text-nowrap mt-2">
+                <thead>
+                    <tr>
+                        <th>商品名</th>
+                        <th>値段</th>
+                        <th>注文個数</th>
+                        <th>合計金額</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${item1Count == null && item2Count == null && item3Count == null}">
+                            <td th:text=カート内に商品はありません></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                    </tr>
+                    <tr th:if="${item1Count} != null">
+                        <td th:text="${item.getItemName1()}"></td>
+                        <td th:text="'&yen;' + ${item.getItemPrice1()}"></td>
+                        <td th:text="${item1Count} + '個'"></td>
+                        <td th:text="'&yen;' + ${item1TotalPrice}"></td>
+                    </tr>
+                    <tr th:if="${item2Count} != null">
+                        <td th:text="${item.getItemName2()}"></td>
+                        <td th:text="'&yen;' + ${item.getItemPrice2()}"></td>
+                        <td th:text="${item2Count} + '個'"></td>
+                        <td th:text="'&yen;' + ${item2TotalPrice}"></td>
+                    </tr>
+                    <tr th:if="${item3Count} != null">
+                        <td th:text="${item.getItemName3()}"></td>
+                        <td th:text="'&yen;' + ${item.getItemPrice3()}"></td>
+                        <td th:text="${item3Count} + '個'"></td>
+                        <td th:text="'&yen;' + ${item3TotalPrice}"></td>
+                    </tr>
+                    <tr th:if="${item1Count != null || item2Count != null || item3Count != null}">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td th:text="'&yen;' + ${totalPrice}"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-2">
+            <button class="btn btn-outline-secondary btn-outline-secondary-cu btn-block " id="back"
+                type="button" onclick="javascript:history.back();">戻る</button>
+         </div>
+     </div>
+</div>
+</body>
+
+</html>
